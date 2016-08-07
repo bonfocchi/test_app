@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\AdminAuth;
 
-use App\User;
+use App\Admin;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -10,6 +10,14 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+  /**
+   * Where to redirect users after login / registration.
+   *
+   * @var string
+   */
+   protected $redirectTo = '/admin';
+   protected $guard = 'admin';
+
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -23,12 +31,6 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -50,7 +52,7 @@ class AuthController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:admins,email',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -63,7 +65,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        return Admin::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
@@ -71,8 +73,7 @@ class AuthController extends Controller
     }
 
 
-    protected $redirectTo = '/admin';
-    protected $guard = 'admin';
+
     public function showLoginForm()
     {
         if (view()->exists('auth.authenticate')) {
