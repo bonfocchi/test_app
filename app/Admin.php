@@ -8,6 +8,21 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Admin extends Authenticatable
 {
+
+  public function catalogs()
+  {
+    return $this->hasMany(Catalog::class);
+  }
+
+  /**
+   * Adds catalog belonging to this admin.
+   *
+   * @var catalog
+   */
+  public function addCatalog(Catalog $catalog)
+  {
+    return $this->catalogs()->save($catalog);
+  }
   /**
    * The attributes that are mass assignable.
    *

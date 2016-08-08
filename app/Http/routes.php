@@ -21,7 +21,7 @@ Route::auth();
 Route::get('/home', 'HomeController@index');
 
 Route::group(['middleware' => ['web']], function () {
-    //Login Routes...
+    //Login & Logout Routes...
     Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
     Route::post('/admin/login','AdminAuth\AuthController@login');
     Route::get('/admin/logout','AdminAuth\AuthController@logout');
@@ -30,10 +30,16 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/register', 'AdminAuth\AuthController@showRegistrationForm');
     Route::post('/admin/register', 'AdminAuth\AuthController@register');
 
-    Route::get('/admin', 'AdminController@index');
-
+    // Password Reset Routes...
     Route::post('admin/password/email','AdminAuth\PasswordController@sendResetLinkEmail');
     Route::post('admin/password/reset','AdminAuth\PasswordController@reset');
     Route::get('admin/password/reset/{token?}','AdminAuth\PasswordController@showResetForm');
+
+    // Admin Area Routes...
+    Route::get('/admin', 'AdminController@index');
+    Route::get('/admin/catalogs', 'AdminCatalogsController@index');
+    Route::get('/admin/catalogs/new', 'AdminCatalogsController@new');
+    Route::post('/admin/catalogs/new', 'AdminCatalogsController@create');
+
 
 });

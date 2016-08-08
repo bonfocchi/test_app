@@ -9,6 +9,8 @@ class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.
+     * Redirect the user to a after login page acccording
+     * with the user type (admin or "client")
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
