@@ -16,6 +16,5 @@ class Catalog extends Model
     public function admin_slug()
     {
       return '/admin/catalogs/'. $this->id;
-
     }
 }

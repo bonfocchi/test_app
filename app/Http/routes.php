@@ -20,7 +20,8 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::group(['middleware' => ['web']], function () {
+    /* -- Admin related Routes -- */
+
     //Login & Logout Routes...
     Route::get('/admin/login','AdminAuth\AuthController@showLoginForm');
     Route::post('/admin/login','AdminAuth\AuthController@login');
@@ -40,6 +41,5 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/admin/catalogs', 'AdminCatalogsController@index');
     Route::get('/admin/catalogs/new', 'AdminCatalogsController@new');
     Route::post('/admin/catalogs/new', 'AdminCatalogsController@create');
-
-
-});
+    Route::get('/admin/catalogs/{catalog}', 'AdminCatalogsController@edit');
+    Route::post('/admin/catalogs/{catalog}', 'AdminCatalogsController@update');

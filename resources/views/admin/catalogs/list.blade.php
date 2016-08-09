@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+
+            @include('admin.alert')
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                   Catalogs
@@ -17,7 +20,7 @@
 
                   <ul class="list-group">
                     @foreach ($catalogs as $catalog)
-                      <li class="list-group-item">{{ $catalog->name }}</li>
+                      <li class="list-group-item"><a href="/admin/catalogs/{{ $catalog->id }}">{{ $catalog->name }}</a></li>
                     @endforeach
                   </ul>
 
