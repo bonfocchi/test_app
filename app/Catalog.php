@@ -13,6 +13,11 @@ class Catalog extends Model
       return $this->belongsTo(Admin::class);
     }
 
+    public function pages()
+    {
+      return $this->hasMany(Page::class);
+    }
+
     public function admin_slug()
     {
       return '/admin/catalogs/'. $this->id;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Catalog;
 use App\Admin;
+use App\Page;
 
 use DB;
 use Illuminate\Http\Request;
@@ -28,7 +29,7 @@ class AdminCatalogsController extends Controller
   }
 
   /**
-   * Show the application dashboard.
+   * Show catalogs list.
    *
    * @return \Illuminate\Http\Response
    */
@@ -39,11 +40,21 @@ class AdminCatalogsController extends Controller
       return view('admin.catalogs.list', compact('catalogs'));
   }
 
+  /**
+   * Show page to create new catalog.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function new()
   {
       return view('admin.catalogs.new');
   }
 
+  /**
+   * Creates new catalog.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function create(Request $request)
   {
     $admin = Auth::guard('admin')->user();
@@ -58,11 +69,22 @@ class AdminCatalogsController extends Controller
 
   }
 
+  /**
+   * Show page to edit catalog.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function edit(Catalog $catalog)
   {
+
       return view('admin.catalogs.edit', ['catalog' => $catalog]);
   }
 
+  /**
+   * Updates catalog name.
+   *
+   * @return \Illuminate\Http\Response
+   */
   public function update(Request $request, Catalog $catalog)
   {
     DB::table('catalogs')
