@@ -23,6 +23,22 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+        .m-l-5 {
+          margin-left: 5px !important;
+        }
+
+        .m-l-10 {
+          margin-left: 10px !important;
+        }
+
+        .m-r-5 {
+          margin-right: 5px !important;
+        }
+
+        .m-r-10 {
+          margin-right: 10px !important;
+        }
     </style>
 </head>
 <body id="app-layout">

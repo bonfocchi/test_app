@@ -22,4 +22,14 @@ class Catalog extends Model
     {
       return '/admin/catalogs/'. $this->id;
     }
+
+    /**
+     * Adds page belonging to this catalog.
+     *
+     * @var catalog
+     */
+    public function addPage(Page $page)
+    {
+      return $this->pages()->save($page);
+    }
 }

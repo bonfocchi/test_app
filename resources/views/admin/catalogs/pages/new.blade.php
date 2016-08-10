@@ -3,28 +3,23 @@
 @section('content')
 <div class="container">
     <div class="row">
-
         <div class="col-md-10 col-md-offset-1">
-
-            @include('admin.alert')
-
             <div class="panel panel-default">
                 <div class="panel-heading">
-                  Edit Catalog
+                  Add Page to {{ $catalog->name }} Catalog
                 </div>
 
                 <div class="panel-body">
 
-                <form method="POST" action="/admin/catalogs/{{ $catalog->id }}">
+                <form method="POST" action="/admin/catalogs/{{ $catalog->id }}/pages/new">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                  {{ method_field('PATCH') }}
 
                   <div class="form-group">
-                    <input name="name" class="form-control" placeholder="Catalog name" value="{{ $catalog->name }}" />
+                    <input name="title" class="form-control" placeholder="Page title" />
                   </div>
 
                   <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Rename</button>
+                    <button type="submit" class="btn btn-primary">Add</button>
                   </div>
                 </form>
 

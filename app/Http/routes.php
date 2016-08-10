@@ -38,8 +38,17 @@ Route::get('/home', 'HomeController@index');
 
     // Admin Area Routes...
     Route::get('/admin', 'AdminController@index');
+
     Route::get('/admin/catalogs', 'AdminCatalogsController@index');
     Route::get('/admin/catalogs/new', 'AdminCatalogsController@new');
     Route::post('/admin/catalogs/new', 'AdminCatalogsController@create');
     Route::get('/admin/catalogs/{catalog}', 'AdminCatalogsController@edit');
-    Route::post('/admin/catalogs/{catalog}', 'AdminCatalogsController@update');
+    Route::patch('/admin/catalogs/{catalog}', 'AdminCatalogsController@update');
+    Route::delete('/admin/catalogs/{catalog}', 'AdminCatalogsController@delete');
+
+    Route::get('/admin/catalogs/{catalog}/pages', 'AdminPagesController@index');
+    Route::get('/admin/catalogs/{catalog}/pages/new', 'AdminPagesController@new');
+    Route::post('/admin/catalogs/{catalog}/pages/new', 'AdminPagesController@create');
+    Route::get('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@edit');
+    Route::patch('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@update');
+    

@@ -81,7 +81,7 @@ class AdminCatalogsController extends Controller
   }
 
   /**
-   * Updates catalog name.
+   * Updates the catalog name.
    *
    * @return \Illuminate\Http\Response
    */
@@ -93,7 +93,24 @@ class AdminCatalogsController extends Controller
 
     Session::flash('success', 'Catalog updated!');
 
-    return redirect('admin/catalogs/'.$catalog->id);
+    return redirect('admin/catalogs');
   }
+
+  /**
+   * Delete catalog.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function delete(Request $request, Catalog $catalog)
+  {
+    DB::table('catalogs')
+          ->where('id', $catalog->id)
+          ->delete();
+
+    Session::flash('success', 'Catalog deleted!');
+
+    return redirect('admin/catalogs');
+  }
+
 
 }
