@@ -51,4 +51,5 @@ Route::get('/home', 'HomeController@index');
     Route::post('/admin/catalogs/{catalog}/pages/new', 'AdminPagesController@create');
     Route::get('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@edit');
     Route::patch('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@update');
-    
+    Route::patch('/admin/catalogs/{catalog}/pages/{page}/reposition', 'AdminPagesController@reposition');
+    Route::delete('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@delete');

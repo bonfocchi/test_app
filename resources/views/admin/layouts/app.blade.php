@@ -24,6 +24,15 @@
             margin-right: 6px;
         }
 
+        .mu-7{
+          margin-top: -7px;
+        }
+
+
+        .mb-0{
+          margin-bottom: 0px !important;
+        }
+
         .m-l-5 {
           margin-left: 5px !important;
         }
