@@ -14,7 +14,6 @@ class CreatePagesTable extends Migration
     {
         Schema::create('pages', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->integer('catalog_id');
             $table->string('title');
             $table->text('description');
@@ -23,7 +22,8 @@ class CreatePagesTable extends Migration
             $table->tinyInteger('bg_color_green');
             $table->tinyInteger('bg_color_blue');
             $table->tinyInteger('bg_color_alpha');
-            $table->dateTime('deleted_at');
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCatalogsTable extends Migration
+class CreatePicturesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,15 @@ class CreateCatalogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('catalogs', function (Blueprint $table) {
+        Schema::create('pictures', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
             $table->integer('admin_id');
-            $table->softDeletes();
+            $table->string('title');
+            $table->text('description');
+            $table->float('wh_ratio');
+            $table->string('cached_file_name');
+            $table->string('storage_file_name');
+            $table->dateTime('deleted_at');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateCatalogsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('catalogs');
+        Schema::drop('pictures');
     }
 }

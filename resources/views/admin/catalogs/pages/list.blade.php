@@ -22,7 +22,6 @@
                     @foreach ($pages as $page)
                       <li class="list-group-item">
                         {{ $page->title }}
-                         - {{ $page->position }}
 
                         <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}" method="POST" class="pull-right">
                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -30,7 +29,7 @@
                           <button class="btn btn-danger btn-xs m-l-10 pull-right">Delete</button>
                         </form>
 
-                        <a href="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/images" class="btn btn-warning m-l-10 btn-xs pull-right disabled" disabled="disabled">Manage images</a>
+                        <a href="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/images" class="btn btn-warning m-l-10 btn-xs pull-right">Manage images</a>
                         <a href="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}" class="btn btn-info btn-xs m-l-10 pull-right">Rename</a>
 
                         <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/reposition" method="POST" class="pull-right">

@@ -20,7 +20,7 @@ class CreateAdminsTable extends Migration
             $table->rememberToken();
             $table->string('secret_key');
             $table->string('api_secret');
-            $table->dateTime('deleted_at');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

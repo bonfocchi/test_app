@@ -103,9 +103,7 @@ class AdminCatalogsController extends Controller
    */
   public function delete(Request $request, Catalog $catalog)
   {
-    DB::table('catalogs')
-          ->where('id', $catalog->id)
-          ->delete();
+    $catalog->delete();
 
     Session::flash('success', 'Catalog deleted!');
 

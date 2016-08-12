@@ -52,4 +52,5 @@ Route::get('/home', 'HomeController@index');
     Route::get('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@edit');
     Route::patch('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@update');
     Route::patch('/admin/catalogs/{catalog}/pages/{page}/reposition', 'AdminPagesController@reposition');
+    Route::get('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@manage_images');
     Route::delete('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@delete');

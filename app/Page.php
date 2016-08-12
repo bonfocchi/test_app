@@ -4,15 +4,31 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Page extends Model
 {
+  use SoftDeletes;
+
+  /**
+   * The attributes that should be mutated to dates.
+   *
+   * @var array
+   */
+  protected $dates = ['deleted_at'];
+
 
   protected $fillable = ['title'];
 
   public function catalog()
   {
     return $this->belongsTo(Catalog::class);
+  }
+
+  public function pictures()
+  {
+    return $this->belongsToMany('App\Picture', 'page_pictures', 'page_id', 'picture_id');
   }
 
   /**

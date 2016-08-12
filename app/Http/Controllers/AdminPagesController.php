@@ -115,6 +115,16 @@ class AdminPagesController extends Controller
   }
 
   /**
+   * Show page to manage images on catalog page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function manage_images(Catalog $catalog, Page $page)
+  {
+    return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page]);
+  }
+
+  /**
    * Delete page.
    *
    * @return \Illuminate\Http\Response
@@ -126,9 +136,7 @@ class AdminPagesController extends Controller
 
     $page->clear_position();
 
-    DB::table('pages')
-          ->where('id', $page->id)
-          ->delete();
+    $page->delete();
 
     Session::flash('success', 'Page deleted!');
 
