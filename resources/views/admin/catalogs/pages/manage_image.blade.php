@@ -15,18 +15,37 @@
 
                 <div class="panel-body">
 
-                  <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Upload Image</a></li>
-                    <li><a data-toggle="tab" href="#menu1">Select from library</a></li>
+                  <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="tab" href="#home">Select from library</a></li>
+                    <li><a data-toggle="tab" href="#menu1">Upload Image</a></li>
                   </ul>
 
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
-                      <h3>Upload Image</h3>
+                      <h3>Image Library</h3>
+                      <img src="..." alt="..." class="img-thumbnail img-responsive">
+
+
                       <p>In progress..</p>
                     </div>
                     <div id="menu1" class="tab-pane fade">
-                      <h3>Image Library</h3>
+                      <h3>Upload Image</h3>
+
+                      <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" class="form-control" name="title" placeholder="Image title">
+                      </div>
+
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="description" placeholder="Image description" rows="3"></textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label>File input</label>
+                        <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                      </div>
                       <p>In progress..</p>
                     </div>
                   </div>

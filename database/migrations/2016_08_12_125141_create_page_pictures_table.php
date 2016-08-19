@@ -12,7 +12,7 @@ class CreatePagePicturesTable extends Migration
      */
     public function up()
     {
-      Schema::create('page_picture', function (Blueprint $table) {
+      Schema::create('page_pictures', function (Blueprint $table) {
         $table->increments('id');
         $table->integer('page_id');
         $table->integer('picture_id');
@@ -37,6 +37,6 @@ class CreatePagePicturesTable extends Migration
      */
     public function down()
     {
-      Schema::drop('page_picture');
+      Schema::drop('page_pictures');
     }
 }

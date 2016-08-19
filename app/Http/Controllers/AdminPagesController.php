@@ -121,7 +121,22 @@ class AdminPagesController extends Controller
    */
   public function manage_images(Catalog $catalog, Page $page)
   {
-    return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page]);
+    $images = $page->pictures()->get();
+
+    return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page, 'images' => $images]);
+  }
+
+  /**
+   * Saves image files and adds them to the page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function add_images(Request $request, Catalog $catalog, Page $page)
+  {
+    // Save image here
+
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+
   }
 
   /**
