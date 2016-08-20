@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'your-key',
-            'secret' => 'your-secret',
-            'region' => 'your-region',
-            'bucket' => 'your-bucket',
+            'key' => env('APP_FILESYSTEM_S3_KEY', 'your-key'),
+            'secret' => env('APP_FILESYSTEM_S3_SECRET', 'your-secret'),
+            'region' => env('APP_FILESYSTEM_S3_REGION', 'your-region'),
+            'bucket' => env('APP_FILESYSTEM_S3_BUCKET', 'your-bucket'),
         ],
 
     ],
