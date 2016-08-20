@@ -28,6 +28,11 @@
           margin-top: -7px;
         }
 
+        .thumb-50{ 
+          min-height:50px;
+          height:50px;
+        }
+
 
         .mb-0{
           margin-bottom: 0px !important;

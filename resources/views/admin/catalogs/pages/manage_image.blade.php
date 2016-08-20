@@ -22,14 +22,14 @@
 
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
-                      <h3>Image Library</h3>
+                      <h3>Image Library <small>(click to add image to page)</small></h3>
                       @foreach ($images as $image)
-                        <img src="{{ Storage::url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive" />
+                        <img src="{{ Storage::url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50" />
                       @endforeach
 
 
 
-                      <p>In progress..</p>
+
                     </div>
                     <div id="menu1" class="tab-pane fade">
                       <h3>Upload Image</h3>
