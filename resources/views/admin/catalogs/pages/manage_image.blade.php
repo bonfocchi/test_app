@@ -31,6 +31,9 @@
                     <div id="menu1" class="tab-pane fade">
                       <h3>Upload Image</h3>
 
+                      <form method="POST" action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/images">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
                       <div class="form-group">
                         <label>Title</label>
                         <input type="text" class="form-control" name="title" placeholder="Image title">
@@ -46,7 +49,12 @@
                         <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
                         <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
                       </div>
-                      <p>In progress..</p>
+
+                      <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Upload</button>
+                      </div>
+
+                    </form>
                     </div>
                   </div>
 

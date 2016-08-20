@@ -13,6 +13,9 @@ use Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use Input;
+use Validator;
+
 class AdminPagesController extends Controller
 {
   /**
@@ -133,9 +136,22 @@ class AdminPagesController extends Controller
    */
   public function add_images(Request $request, Catalog $catalog, Page $page)
   {
-    // Save image here
+    // getting all of the post data
+    $file = Input::file('file');
 
-    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+    $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
+    $validator = Validator::make(array('file'=> $file), $rules);
+    if($validator->passes()){
+       $destinationPath = 'uploads';
+       $filename = $file->getClientOriginalName();
+       $upload_success = $file->move($destinationPath, $filename);
+
+       Session::flash('success', 'Image Added');
+       return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+    }
+    else {
+      return Redirect::to('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images')->withInput()->withErrors($validator);
+    }
 
   }
 
