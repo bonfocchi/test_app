@@ -24,7 +24,7 @@
                     <div id="home" class="tab-pane fade in active">
                       <h3>Image Library <small>(click to add image to page)</small></h3>
                       @foreach ($images as $image)
-                        <img src="{{ Storage::url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50" />
+                        <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50" />
                       @endforeach
 
 
