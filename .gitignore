@@ -4,5 +4,5 @@
 Homestead.yaml
 Homestead.json
 .env
-config/database.php
-config/filesystems.php
+/config/database.php
+/config/filesystems.php
