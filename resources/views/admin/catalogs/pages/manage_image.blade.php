@@ -23,7 +23,10 @@
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                       <h3>Image Library</h3>
-                      <img src="..." alt="..." class="img-thumbnail img-responsive">
+                      @foreach ($images as $image)
+                        <img src="{{ Storage::url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive" />
+                      @endforeach
+
 
 
                       <p>In progress..</p>
