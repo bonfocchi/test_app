@@ -31,7 +31,7 @@
                     <div id="menu1" class="tab-pane fade">
                       <h3>Upload Image</h3>
 
-                      <form method="POST" action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/images">
+                      <form method="POST" action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/images" enctype='multipart/form-data'>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                       <div class="form-group">

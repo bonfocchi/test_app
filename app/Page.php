@@ -32,6 +32,16 @@ class Page extends Model
   }
 
   /**
+   * Adds picture belonging to this page.
+   *
+   * @var picture
+   */
+  public function addPicture(Picture $picture)
+  {
+    return $this->pictures()->save($picture);
+  }
+
+  /**
    * Sets the position after the page is created.
    */
   public function set_position(){

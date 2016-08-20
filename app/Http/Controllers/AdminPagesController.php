@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Catalog;
 use App\Admin;
 use App\Page;
+use App\Picture;
 
+use Storage;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
@@ -13,8 +15,7 @@ use Session;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
-use Input;
-use Validator;
+
 
 class AdminPagesController extends Controller
 {
@@ -136,21 +137,39 @@ class AdminPagesController extends Controller
    */
   public function add_images(Request $request, Catalog $catalog, Page $page)
   {
-    // getting all of the post data
-    $file = Input::file('file');
 
-    $rules = array('file' => 'required'); //'required|mimes:png,gif,jpeg,txt,pdf,doc'
-    $validator = Validator::make(array('file'=> $file), $rules);
-    if($validator->passes()){
-       $destinationPath = 'uploads';
+    if ($request->hasFile('file') && $request->file('file')->isValid()) {
+       $file = $request->file('file');
+       $title = $request->input('title');
+       $description = $request->input('description');
        $filename = $file->getClientOriginalName();
-       $upload_success = $file->move($destinationPath, $filename);
+
+       $filename = md5($filename . microtime())."_img_". $filename;
+
+       while( Storage::exists($filename) ){
+         $filename_array = explode("_img_", $filename);
+         $filename_array[0] = md5($filename . microtime());
+         $filename = implode ( "_img_",  $filename_array );
+       }
+
+       //dd(file_get_contents($file->getRealPath()));
+
+       Storage::put($filename, file_get_contents($file->getRealPath()) );
+
+       $picture = $page->addPicture(
+                 new Picture(['title' => $title,
+                              'description' => $description,
+                              'storage_file_name' => $filename
+                              ])
+               );
+
 
        Session::flash('success', 'Image Added');
        return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
     }
     else {
-      return Redirect::to('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images')->withInput()->withErrors($validator);
+      Session::flash('error', 'There was an error uploading the Image');
+      return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
     }
 
   }

@@ -16,6 +16,8 @@ class Picture extends Model
    * @var array
    */
   protected $dates = ['deleted_at'];
+  protected $fillable = ['title', 'description', 'storage_file_name'];
+
 
 
   public function pages()
