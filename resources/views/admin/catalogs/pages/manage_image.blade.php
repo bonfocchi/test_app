@@ -30,21 +30,38 @@
                             <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
                           </a>
                           <div class="popover-content hide" >
+
+                            <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="pull-right mt-up">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              {{ method_field('DELETE') }}
+                              <button type='submit' class='btn btn-danger btn-xs pull-right' onclick="return confirm('Are you sure you want to permanently delete this picture?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+                            </form>
+
                             <div>
                               <img src='{{ presigned_url($image->storage_file_name) }}' class='thumb-m-180' />
                               <p>{{ $image->description }}</p>
                               <p>
-                                <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="pull-left">
+                                <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" >
                                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" name="x" placeholder="X-axis position">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" name="y" placeholder="Y-axis position">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" name="w" placeholder="Width">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" name="h" placeholder="Height">
+                                  </div>
+
                                   <button type='submit' class='btn btn-primary btn-xs'>Add to Page</button>
                                 </form>
-
-                                <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="pull-right">
-                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                  {{ method_field('DELETE') }}
-                                  <button type='submit' class='btn btn-danger btn-xs pull-right' onclick="return confirm('Are you sure you want to permanently delete this picture?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
-                                </form>
-                                &nbsp;
                               </p>
                             </div>
                           </div>
@@ -96,7 +113,52 @@
                 </div>
 
                 <div class="panel-body">
+                  <?php $x = 0; ?>
+                  @foreach ($page_images as $image)
+                    <div class="picture">
+                      <a role="button" tabindex="<?php echo $x; ?>" data-toggle="popover" title="{{ $image->title }}" >
+                        <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
+                      </a>
+                      <div class="popover-content hide" >
 
+                        <div>
+                          <img src='{{ presigned_url($image->storage_file_name) }}' class='thumb-m-180' />
+                          <p>{{ $image->description }}</p>
+                          <p>
+                            <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              {{ method_field('PUT') }}
+
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="x" value="{{ $image->pivot->x }}">
+                              </div>
+
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="y" value="{{ $image->pivot->y }}">
+                              </div>
+
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="w" value="{{ $image->pivot->w }}">
+                              </div>
+
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="h" value="{{ $image->pivot->h }}">
+                              </div>
+
+                              <button type='submit' class='btn btn-success btn-xs'>Update</button>
+                            </form>
+
+                            <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}/unlink" method="POST" class="pull-right mt-up2">
+                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                              <button type='submit' class='btn btn-warning btn-xs pull-right'>Remove from page</button>
+                            </form>
+
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <?php $x++; ?>
+                  @endforeach
 
 
                 </div>

@@ -28,7 +28,9 @@ class Page extends Model
 
   public function pictures()
   {
-    return $this->belongsToMany('App\Picture', 'page_pictures', 'page_id', 'picture_id');
+    return $this->belongsToMany('App\Picture', 'page_pictures', 'page_id', 'picture_id')
+                ->withPivot('title', 'description', 'position', 'x', 'y', 'w', 'h', 'deleted_at')
+                ->withTimestamps();
   }
 
   /**

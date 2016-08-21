@@ -1,7 +1,7 @@
 window.onload = function(){
   $('a[data-toggle="popover"]').popover({
     animated: 'fade',
-    placement: 'bottom',
+    //placement: 'bottom',
     html: true,
     content: function() {
       return $(this).next('.popover-content').html();

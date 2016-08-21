@@ -144,23 +144,22 @@ class AdminPagesController extends Controller
    */
   public function manage_images(Catalog $catalog, Page $page)
   {
-    $images = $page->pictures()->get();
+    $images = DB::table('pictures')->get();
+    $page_images = $page->pictures()->get();
 
-    return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page, 'images' => $images]);
+    return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page, 'images' => $images, 'page_images' => $page_images]);
   }
 
   /**
-   * Saves image files and adds them to the page.
+   * Uploads and saves picture with attributes.
    *
    * @return \Illuminate\Http\Response
    */
-  public function add_images(Request $request, Catalog $catalog, Page $page)
+  public function add_image(Request $request, Catalog $catalog, Page $page)
   {
- //
-
      $this->validate($request, [
           'title' => 'required|max:255',
-          'photo' => 'required|file|image|mimes:jpeg,bmp,png'
+          'file' => 'required|file|image|mimes:jpeg,bmp,png'
       ]);
 
 
@@ -178,17 +177,12 @@ class AdminPagesController extends Controller
          $filename = implode ( "_img_",  $filename_array );
        }
 
-       //dd(file_get_contents($file->getRealPath()));
-
        Storage::put($filename, file_get_contents($file->getRealPath()) );
 
-       $picture = $page->addPicture(
-                 new Picture(['title' => $title,
-                              'description' => $description,
-                              'storage_file_name' => $filename
-                              ])
-               );
-
+       DB::table('pictures')->insert(['title' => $title,
+                                      'description' => $description,
+                                      'storage_file_name' => $filename
+                                      ]);
 
        Session::flash('success', 'Image Added');
        return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
@@ -199,6 +193,77 @@ class AdminPagesController extends Controller
     }
 
   }
+
+
+  /**
+   * Adds picture to page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function link_image_to_page(Request $request, Catalog $catalog, Page $page, Picture $picture)
+  {
+
+    $this->validate($request, [
+         'x' => 'required|integer|between:0,2480',
+         'y' => 'required|integer|between:0,3508',
+         'w' => 'required|integer|between:10,3508', // Ideally I would max this to the image width
+         'h' => 'required|integer|between:10,3508', // Ideally I would max this to the image height
+     ]);
+
+
+    $page->pictures()->attach($picture->id, [
+                              'x' => $request->input('x'),
+                              'y' => $request->input('y'),
+                              'w' => $request->input('w'),
+                              'h' => $request->input('h')
+                            ]);
+
+    Session::flash('success', 'Image added to page');
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+
+  }
+
+  /**
+   * Update picture attributes on page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function update_link_image_to_page(Request $request, Catalog $catalog, Page $page, Picture $picture)
+  {
+
+    $this->validate($request, [
+         'x' => 'required|integer|between:0,2480',
+         'y' => 'required|integer|between:0,3508',
+         'w' => 'required|integer|between:10,3508', // Ideally I would max this to the image width
+         'h' => 'required|integer|between:10,3508', // Ideally I would max this to the image height
+     ]);
+
+    $page->pictures()->updateExistingPivot($picture->id, [
+                              'x' => $request->input('x'),
+                              'y' => $request->input('y'),
+                              'w' => $request->input('w'),
+                              'h' => $request->input('h')
+                            ]);
+
+    Session::flash('success', 'Image attributes on page updated successfully.');
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+
+  }
+
+  /**
+   * Removes picture from page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function unlink_image_to_page(Request $request, Catalog $catalog, Page $page, Picture $picture)
+  {
+    $page->pictures()->detach($picture->id);
+
+    Session::flash('success', 'Image removed from page.');
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
+
+  }
+
 
   /**
    * Delete Image

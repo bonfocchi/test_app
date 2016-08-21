@@ -53,7 +53,11 @@ Route::get('/home', 'HomeController@index');
     Route::patch('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@update');
     Route::patch('/admin/catalogs/{catalog}/pages/{page}/reposition', 'AdminPagesController@reposition');
     Route::get('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@manage_images');
-    Route::post('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@add_images');
+    Route::post('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@add_image');
     Route::delete('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@delete');
+    Route::post('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}', 'AdminPagesController@link_image_to_page');
+    Route::put('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}', 'AdminPagesController@update_link_image_to_page');
+
+    Route::post('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}/unlink', 'AdminPagesController@unlink_image_to_page');
 
     Route::delete('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}', 'AdminPagesController@delete_image');

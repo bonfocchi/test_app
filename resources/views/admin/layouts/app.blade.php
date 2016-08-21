@@ -28,13 +28,21 @@
           margin-top: -7px;
         }
 
+        .mt-up{
+          margin-top:-37px;
+        }
+
+        .mt-up2{
+          margin-top:-21px;
+        }
+
         .thumb-50{
           min-height:50px;
           height:50px;
         }
 
         .thumb-m-180{
-          /*max-width:180px;*/
+          max-width:200px;
           max-height:180px;
         }
 
