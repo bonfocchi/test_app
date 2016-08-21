@@ -25,9 +25,10 @@
                       <h3>Image Library <small>(click to add image to page)</small></h3>
                       <?php $x = 0; ?>
                       @foreach ($images as $image)
+                        <?php $image_url = presigned_url('thumbnails/'.$image->storage_file_name); ?>
                         <div class="picture">
                           <a role="button" tabindex="<?php echo $x; ?>" data-toggle="popover" title="{{ $image->title }}" >
-                            <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
+                            <img src="{{ $image_url }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
                           </a>
                           <div class="popover-content hide" >
 
@@ -38,7 +39,7 @@
                             </form>
 
                             <div>
-                              <img src='{{ presigned_url($image->storage_file_name) }}' class='thumb-m-180' />
+                              <img src="{{ $image_url }}" class='thumb-m-180' />
                               <p>{{ $image->description }}</p>
                               <p>
                                 <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" >
@@ -115,14 +116,16 @@
                 <div class="panel-body">
                   <?php $x = 0; ?>
                   @foreach ($page_images as $image)
+                  <?php $image_url = presigned_url('thumbnails/'.$image->storage_file_name); ?>
+
                     <div class="picture">
                       <a role="button" tabindex="<?php echo $x; ?>" data-toggle="popover" title="{{ $image->title }}" >
-                        <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
+                        <img src="{{ $image_url }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
                       </a>
                       <div class="popover-content hide" >
 
                         <div>
-                          <img src='{{ presigned_url($image->storage_file_name) }}' class='thumb-m-180' />
+                          <img src="{{ $image_url }}" class='thumb-m-180' />
                           <p>{{ $image->description }}</p>
                           <p>
                             <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="">

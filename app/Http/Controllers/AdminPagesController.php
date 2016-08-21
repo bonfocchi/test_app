@@ -11,6 +11,7 @@ use Storage;
 use DB;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Image;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -177,7 +178,17 @@ class AdminPagesController extends Controller
          $filename = implode ( "_img_",  $filename_array );
        }
 
-       Storage::put($filename, file_get_contents($file->getRealPath()) );
+
+       $original_image = Image::make($file->getRealPath());
+       $thumb_image = Image::make($file->getRealPath())->resize(null, 300, function ($constraint) {
+            $constraint->aspectRatio();
+            $constraint->upsize();
+        });;
+       $original_image = $original_image->stream();
+       $thumb_image = $thumb_image->stream();
+
+       Storage::put($filename, $original_image->__toString());
+       Storage::put('thumbnails/'.$filename, $thumb_image->__toString());
 
        DB::table('pictures')->insert(['title' => $title,
                                       'description' => $description,
