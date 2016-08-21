@@ -16,7 +16,7 @@ function presigned_url($filename){
     return (string) $request->getUri();
 
   }else{
-    return (string) Storage::url($filename);
+    return (string) \Storage::url($filename);
   }
 
 }
