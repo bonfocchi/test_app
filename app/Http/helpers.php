@@ -8,8 +8,8 @@ function presigned_url($filename){
 
     $command = $client->getCommand('GetObject', [
        'Bucket' => \Config::get('filesystems.disks.s3.bucket'),
-       'Key'    => $filename,
-       'ResponseContentDisposition' => 'attachment;'
+       'Key'    => $filename //,
+       //'ResponseContentDisposition' => 'attachment;'
     ]);
 
     $request = $client->createPresignedRequest($command, $expiry);
