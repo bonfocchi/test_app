@@ -284,8 +284,9 @@ class AdminPagesController extends Controller
   public function delete_image(Request $request, Catalog $catalog, Page $page, Picture $picture)
   {
 
-    Storage::delete($picture->storage_file_name);
     $picture->delete();
+    Storage::delete($picture->storage_file_name);
+
 
     Session::flash('success', 'Picture deleted!');
 
