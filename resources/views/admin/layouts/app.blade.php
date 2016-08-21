@@ -28,11 +28,24 @@
           margin-top: -7px;
         }
 
-        .thumb-50{ 
+        .thumb-50{
           min-height:50px;
           height:50px;
         }
 
+        .thumb-m-180{
+          /*max-width:180px;*/
+          max-height:180px;
+        }
+
+        .no-padding{
+          padding: 0px !important;
+        }
+
+        .picture{
+          display: inline-block;
+          cursor: pointer;
+        }
 
         .mb-0{
           margin-bottom: 0px !important;
@@ -109,6 +122,8 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
+    <script src="/js/script.js"></script>
+
 </body>
 </html>

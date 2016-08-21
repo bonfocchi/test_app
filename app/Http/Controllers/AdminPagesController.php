@@ -103,6 +103,25 @@ class AdminPagesController extends Controller
   }
 
   /**
+   * Delete page.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function delete(Request $request, Catalog $catalog, Page $page)
+  {
+
+    // Image verification or removal to be added Here
+
+    $page->clear_position();
+
+    $page->delete();
+
+    Session::flash('success', 'Page deleted!');
+
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/');
+  }
+
+  /**
    * Updates the page position.
    *
    * @return \Illuminate\Http\Response
@@ -137,6 +156,13 @@ class AdminPagesController extends Controller
    */
   public function add_images(Request $request, Catalog $catalog, Page $page)
   {
+ //
+
+     $this->validate($request, [
+          'title' => 'required|max:255',
+          'photo' => 'required|file|image|mimes:jpeg,bmp,png'
+      ]);
+
 
     if ($request->hasFile('file') && $request->file('file')->isValid()) {
        $file = $request->file('file');
@@ -175,22 +201,19 @@ class AdminPagesController extends Controller
   }
 
   /**
-   * Delete page.
+   * Delete Image
    *
    * @return \Illuminate\Http\Response
    */
-  public function delete(Request $request, Catalog $catalog, Page $page)
+  public function delete_image(Request $request, Catalog $catalog, Page $page, Picture $picture)
   {
 
-    // Image verification or removal to be added Here
+    Storage::delete($picture->storage_file_name);
+    $picture->delete();
 
-    $page->clear_position();
+    Session::flash('success', 'Picture deleted!');
 
-    $page->delete();
-
-    Session::flash('success', 'Page deleted!');
-
-    return redirect('admin/catalogs/'.$catalog->id.'/pages/');
+    return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
   }
 
 }

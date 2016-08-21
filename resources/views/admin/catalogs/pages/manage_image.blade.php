@@ -23,9 +23,35 @@
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active">
                       <h3>Image Library <small>(click to add image to page)</small></h3>
+                      <?php $x = 0; ?>
                       @foreach ($images as $image)
-                        <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50" />
+                        <div class="picture">
+                          <a role="button" tabindex="<?php echo $x; ?>" data-toggle="popover" title="{{ $image->title }}" >
+                            <img src="{{ presigned_url($image->storage_file_name) }}" alt="{{ $image->title }}" class="img-thumbnail img-responsive thumb-50 no-padding" />
+                          </a>
+                          <div class="popover-content hide" >
+                            <div>
+                              <img src='{{ presigned_url($image->storage_file_name) }}' class='thumb-m-180' />
+                              <p>{{ $image->description }}</p>
+                              <p>
+                                <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="pull-left">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  <button type='submit' class='btn btn-primary btn-xs'>Add to Page</button>
+                                </form>
+
+                                <form action="/admin/catalogs/{{ $catalog->id }}/pages/{{ $page->id }}/picture/{{ $image->id }}" method="POST" class="pull-right">
+                                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                  {{ method_field('DELETE') }}
+                                  <button type='submit' class='btn btn-danger btn-xs pull-right' onclick="return confirm('Are you sure you want to permanently delete this picture?');"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete</button>
+                                </form>
+                                &nbsp;
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        <?php $x++; ?>
                       @endforeach
+
 
 
 
@@ -48,9 +74,9 @@
                       </div>
 
                       <div class="form-group">
-                        <label>File input</label>
+                        <label>Photo</label>
                         <input type="file" class="form-control-file" name="file" aria-describedby="fileHelp">
-                        <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
+                        <small id="fileHelp" class="form-text text-muted">The file must be an image of the following type: jpeg or bmp or png.</small>
                       </div>
 
                       <div class="form-group">
@@ -61,9 +87,22 @@
                     </div>
                   </div>
 
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                  Pictures in Page
+                </div>
+
+                <div class="panel-body">
+
+
 
                 </div>
             </div>
+
+
         </div>
     </div>
 </div>

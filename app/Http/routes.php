@@ -55,3 +55,5 @@ Route::get('/home', 'HomeController@index');
     Route::get('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@manage_images');
     Route::post('/admin/catalogs/{catalog}/pages/{page}/images', 'AdminPagesController@add_images');
     Route::delete('/admin/catalogs/{catalog}/pages/{page}', 'AdminPagesController@delete');
+
+    Route::delete('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}', 'AdminPagesController@delete_image');
