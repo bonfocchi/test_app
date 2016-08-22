@@ -33,8 +33,9 @@ Personally I would use a single table with roles (user groups).
     (In progress...)
 
 5 - Frontend.
-5.2 - Pictures thumbnail creation to be displayed on the frontend;
-5.1 - PDF creation for user download.
+5.1 - Pictures thumbnail creation to be displayed on the frontend. DONE
+5.2 - PDF creation for user download.
+5.3 - Catalog listing and PDF download after login.
 
 6 - RESTfull API following the specs.
     (NOTE: There is no API documentation regarding Catalogs or Catalog pages.)  
