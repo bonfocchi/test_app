@@ -145,7 +145,7 @@ class AdminPagesController extends Controller
    */
   public function manage_images(Catalog $catalog, Page $page)
   {
-    $images = DB::table('pictures')->get();
+    $images = Picture::all();
     $page_images = $page->pictures()->get();
 
     return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page, 'images' => $images, 'page_images' => $page_images]);
@@ -286,7 +286,6 @@ class AdminPagesController extends Controller
 
     $picture->delete();
     Storage::delete($picture->storage_file_name);
-
 
     Session::flash('success', 'Picture deleted!');
 
