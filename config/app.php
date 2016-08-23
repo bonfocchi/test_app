@@ -158,6 +158,8 @@ return [
 
         Intervention\Image\ImageServiceProvider::class,
 
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+
     ],
 
     /*
@@ -205,6 +207,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Image' => Intervention\Image\Facades\Image::class,
+
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
 
 
     ],

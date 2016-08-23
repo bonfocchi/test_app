@@ -46,12 +46,12 @@ return [
             'provider' => 'admin',
         ],
 
-      /*
-        'api' => [
-            'driver' => 'token',
-            'provider' => 'admin', // user
-        ],
-        */
+
+        // 'api' => [
+        //     'driver' => 'token',
+        //     'provider' => 'admin', // user
+        // ],
+
     ],
 
     /*

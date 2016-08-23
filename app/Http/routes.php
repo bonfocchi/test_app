@@ -61,3 +61,11 @@ Route::get('/home', 'HomeController@index');
     Route::post('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}/unlink', 'AdminPagesController@unlink_image_to_page');
 
     Route::delete('/admin/catalogs/{catalog}/pages/{page}/picture/{picture}', 'AdminPagesController@delete_image');
+
+    // API ROUTES
+
+    Route::post('api/v1/login', 'ApiV1AuthenticateController@authenticate');
+
+    Route::group(['prefix' => 'api/v1', 'middleware' => 'jwt-auth'], function () {
+            Route::get('/apitest', 'ApiV1Controller@api_test');
+        });
