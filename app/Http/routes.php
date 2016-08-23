@@ -64,8 +64,12 @@ Route::get('/home', 'HomeController@index');
 
     // API ROUTES
 
-    Route::post('api/v1/login', 'ApiV1AuthenticateController@authenticate');
+    Route::post('api/v1/login', 'ApiV1LoginController@authenticate');
+    Route::get('api/v1/login', 'ApiV1LoginController@retrive_login');
+    Route::put('api/v1/login', 'ApiV1LoginController@regenerate');
+    Route::delete('api/v1/login', 'ApiV1LoginController@logout');
 
     Route::group(['prefix' => 'api/v1', 'middleware' => 'jwt-auth'], function () {
-            Route::get('/apitest', 'ApiV1Controller@api_test');
-        });
+
+      #Route::get('/login', 'ApiV1UsersController@api_test');
+    });
