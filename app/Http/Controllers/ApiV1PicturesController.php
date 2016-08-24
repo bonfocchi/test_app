@@ -397,7 +397,7 @@ class ApiV1PicturesController extends ApiV1Controller
 
          }else if ($request->size == 'medium'){
            // Medium size
-           $medium_image = Image::make(file_get_contents( $base_url . presigned_url($image->storage_file_name) ) )->resize(null, 600, function ($constraint) {
+           $medium_image = Image::make(file_get_contents( $base_url . presigned_url($image->storage_file_name) ) )->resize(null, 400, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
@@ -408,10 +408,9 @@ class ApiV1PicturesController extends ApiV1Controller
            $contents = $thumbnail_image->stream();
          }
 
-      $contents = $original_image->stream();
 
       $response = \Response::make($contents, 200);
-      $response->header('Content-Type', 'application/image');
+      $response->header('Content-Type', 'application/image'); // To test on Postman use: image/*
       return $response;
 
     }else{
