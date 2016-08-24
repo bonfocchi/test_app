@@ -28,16 +28,15 @@ Personally I would use a single table with roles (user groups).
     (I started with Vagrant and was able to deploy to EC2, but had issues provisioning the VM with the same caracteristics of the local VM, ended up using forge due to the time limit.)
     NOTE: Usually I do this when I setup the environment, but in this case I wanted to move forward with the code first due to the time limit.   
 
-4 - Models, Relations and CRUD. (CURRENT)
+4 - Models, Relations and CRUD. (STANDBY)
     (Note regarding adding pictures to pages, ideally I would use a drag and drop interface to add pictures to a page, to position and resize them)
-    (In progress...)
 
 5 - Frontend.
 5.1 - Pictures thumbnail creation to be displayed on the frontend. DONE
 5.2 - PDF creation for user download.
 5.3 - Catalog listing and PDF download after login.
 
-6 - RESTfull API following the specs.
+6 - RESTfull API following the specs. (CURRENT)
     (NOTE: There is no API documentation regarding Catalogs or Catalog pages.)  
 
 7 - Tune up.

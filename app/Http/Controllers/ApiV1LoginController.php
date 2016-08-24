@@ -15,7 +15,12 @@ use Exception;
 class ApiV1LoginController extends ApiV1Controller
 {
 
-
+  /**
+   * Authenticate user.
+   *
+   * @param  obj  $request
+   * @return json (with token)
+   */
   public function authenticate(Request $request)
  {
 
@@ -71,7 +76,12 @@ class ApiV1LoginController extends ApiV1Controller
     return $this->build_reply($request, 1, 201, ["token" => $token] );
  }
 
-
+ /**
+  * Retrieve Login data.
+  *
+  * @param  obj  $request
+  * @return json
+  */
  public function retrive_login(Request $request)
  {
    $valid = $this->token_valid();
@@ -97,6 +107,12 @@ class ApiV1LoginController extends ApiV1Controller
 
  }
 
+ /**
+  * Refresh API Token.
+  *
+  * @param  obj  $request
+  * @return json (with new token)
+  */
  public function regenerate(Request $request){
    $valid = $this->token_valid();
 
@@ -125,6 +141,12 @@ class ApiV1LoginController extends ApiV1Controller
 
  }
 
+ /**
+  * Logout User (invalidate current token).
+  *
+  * @param  obj  $request
+  * @return json
+  */
  public function logout(Request $request){
    $valid = $this->token_valid();
 

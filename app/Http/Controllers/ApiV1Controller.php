@@ -14,7 +14,16 @@ use Exception;
 class ApiV1Controller extends Controller
 {
 
-
+  /**
+   * Build and reply json
+   *
+   * @param  obj  $request
+   * @param  int  $success
+   * @param  int  $code
+   * @param  array  $data
+   * @param  array  $errors
+   * @return json
+   */
    public function build_reply($request, $success, $code, $data = [], $errors = [] ){
      $reply =  [ "success" => $success,
                  "code" => $code,
@@ -31,6 +40,11 @@ class ApiV1Controller extends Controller
 
    }
 
+   /**
+    * Verifies if toke is valid
+    *
+    * @return json
+    */
    public function token_valid(){
 
      try {

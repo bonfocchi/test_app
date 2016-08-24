@@ -71,5 +71,8 @@ Route::get('/home', 'HomeController@index');
 
     Route::group(['prefix' => 'api/v1', 'middleware' => 'jwt-auth'], function () {
 
-      #Route::get('/login', 'ApiV1UsersController@api_test');
+      Route::get('/users/{id}', 'ApiV1UsersController@check_user');
+      Route::post('/users', 'ApiV1UsersController@create_user');
+      Route::delete('/users/{id}', 'ApiV1UsersController@delete_user');
+
     });
