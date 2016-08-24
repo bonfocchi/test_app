@@ -190,7 +190,10 @@ class AdminPagesController extends Controller
        Storage::put($filename, $original_image->__toString());
        Storage::put('thumbnails/'.$filename, $thumb_image->__toString());
 
-       DB::table('pictures')->insert(['title' => $title,
+       $admin = Auth::guard('admin')->user();
+
+       DB::table('pictures')->insert(['admin_id' => $admin->id,
+                                      'title' => $title,
                                       'description' => $description,
                                       'storage_file_name' => $filename
                                       ]);
