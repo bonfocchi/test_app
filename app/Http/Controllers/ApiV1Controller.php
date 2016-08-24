@@ -24,7 +24,7 @@ class ApiV1Controller extends Controller
    * @param  array  $errors
    * @return json
    */
-   public function build_reply($request, $success, $code, $data = [], $errors = [] ){
+   public function build_reply($request, $success, $code, $data = [], $errors = [], $extras = [] ){
      $reply =  [ "success" => $success,
                  "code" => $code,
                  "meta" => [
@@ -35,6 +35,10 @@ class ApiV1Controller extends Controller
                  "errors" => $errors,
                  "duration"=> round((microtime(true) - LARAVEL_START), 3)
                  ];
+      if ( !empty($extras) ){
+        $reply =  array_merge_recursive($reply, $extras);
+      }
+
 
       return response()->json($reply)->setstatuscode($code);
 

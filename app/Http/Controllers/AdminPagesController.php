@@ -160,7 +160,7 @@ class AdminPagesController extends Controller
   {
      $this->validate($request, [
           'title' => 'required|max:255',
-          'file' => 'required|file|image|mimes:jpeg,bmp,png'
+          'file' => 'required|file|image|mimes:jpeg,bmp,png,gif' 
       ]);
 
 
@@ -192,11 +192,20 @@ class AdminPagesController extends Controller
 
        $admin = Auth::guard('admin')->user();
 
-       DB::table('pictures')->insert(['admin_id' => $admin->id,
+       /*DB::table('pictures')->insert(['admin_id' => $admin->id,
                                       'title' => $title,
                                       'description' => $description,
                                       'storage_file_name' => $filename
-                                      ]);
+                                    ]);*/
+      $picture = new Picture;
+
+      $picture->admin_id = $admin->id;
+      $picture->title = $title;
+      $picture->description = $description;
+      $picture->storage_file_name = $filename;
+
+      $picture->save();
+
 
        Session::flash('success', 'Image Added');
        return redirect('admin/catalogs/'.$catalog->id.'/pages/'.$page->id.'/images');
