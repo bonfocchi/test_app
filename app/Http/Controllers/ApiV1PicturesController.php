@@ -373,7 +373,7 @@ class ApiV1PicturesController extends ApiV1Controller
 
       $admin = JWTAuth::parseToken()->authenticate();
 
-      $picture = new Picture;
+      $picture = Picture::find($id);
 
       $picture->admin_id = $admin->id;
       $picture->storage_file_name = $filename;
@@ -383,7 +383,7 @@ class ApiV1PicturesController extends ApiV1Controller
       $success = 1;
       $code = 201;
       $data = [ "updated" => 1,
-                "updated_id" => $picture->id
+                "updated_id" => $id
               ];
 
       return $this->build_reply($request, $success, $code, $data, $errors );
