@@ -78,7 +78,7 @@ Route::get('/home', 'HomeController@index');
       Route::get('/pictures', 'ApiV1PicturesController@retrieve_all');
       Route::get('/pictures/{id}', 'ApiV1PicturesController@retrieve');
       Route::post('/pictures', 'ApiV1PicturesController@create');
-      Route::put('/pictures/{id}', 'ApiV1PicturesController@update'); // must use x-www-form-urlencoded to test on post
+      Route::put('/pictures/{id}', 'ApiV1PicturesController@update'); // must use x-www-form-urlencoded to test on Postman
       Route::delete('/pictures/{id}', 'ApiV1PicturesController@delete');
       Route::post('/pictures/{id}/upload', 'ApiV1PicturesController@upload');
       Route::get('/pictures/{id}/download', 'ApiV1PicturesController@download');
