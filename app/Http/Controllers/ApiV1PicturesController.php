@@ -33,7 +33,7 @@ class ApiV1PicturesController extends ApiV1Controller
     $base_url = URL::to('/');
 
     $admin = JWTAuth::parseToken()->authenticate();
-    $images = $admin->pictures->get();
+    $images = $admin->pictures()->get();
     //$images = Picture::all();
 
     if ( !$images->isEmpty() ){
