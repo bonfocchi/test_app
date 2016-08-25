@@ -27,4 +27,9 @@ class Picture extends Model
     	          ->withTimestamps();
   }
 
+  public function admin()
+  {
+    return $this->belongsTo(Admin::class);
+  }
+
 }

@@ -33,6 +33,13 @@ class Admin extends Authenticatable
   {
     return $this->catalogs()->save($catalog);
   }
+
+  public function pictures()
+  {
+    return $this->hasMany(Picture::class);
+  }
+
+
   /**
    * The attributes that are mass assignable.
    *
