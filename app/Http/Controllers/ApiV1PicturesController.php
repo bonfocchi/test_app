@@ -411,20 +411,25 @@ class ApiV1PicturesController extends ApiV1Controller
             ($request->has('size') && ($request->size == 'full') )
          ){
            // Full size
-           //dd($image->storage_file_name);
-           $original_image = Image::make(file_get_contents( $base_url . presigned_url($image->storage_file_name) ) );
+           $image_link = presigned_url($image->storage_file_name);
+           $presigned_image_link = ((strpos($image_link, "http") === 0) ? $image_link : ($base_url.$image_link));
+           $original_image = Image::make(file_get_contents( $presigned_image_link ) );
            $contents = $original_image->stream();
 
          }else if ($request->size == 'medium'){
            // Medium size
-           $medium_image = Image::make(file_get_contents( $base_url . presigned_url($image->storage_file_name) ) )->resize(null, 400, function ($constraint) {
+           $image_link = presigned_url($image->storage_file_name);
+           $presigned_image_link = ((strpos($image_link, "http") === 0) ? $image_link : ($base_url.$image_link));
+           $medium_image = Image::make(file_get_contents( $presigned_image_link ) )->resize(null, 400, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             });
            $contents = $medium_image->stream();
          }else{
            // Thumbnail size
-           $thumbnail_image = Image::make(file_get_contents( $base_url . presigned_url('thumbnails/'.$image->storage_file_name) ) );
+           $image_link = presigned_url('thumbnails/'.$image->storage_file_name);
+           $presigned_image_link = ((strpos($image_link, "http") === 0) ? $image_link : ($base_url.$image_link));
+           $thumbnail_image = Image::make(file_get_contents( $presigned_image_link ) );
            $contents = $thumbnail_image->stream();
          }
 
