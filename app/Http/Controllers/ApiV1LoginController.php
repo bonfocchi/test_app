@@ -90,7 +90,7 @@ class ApiV1LoginController extends ApiV1Controller
      $user = $valid['user'];
      $data = array();
      $data['id'] = $user->id;
-     $data['hubsynch_id'] = '?';
+     $data['hubsynch_id'] = $user->hubsynch_id;
      $data['email'] = $user->email;
      $data['created_at'] = $user->created_at->toDateTimeString();
      $data['updated_at'] = $user->updated_at->toDateTimeString();

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Admin;
+use App\User;
 
 use App\Http\Requests;
 
@@ -23,7 +23,7 @@ class ApiV1UsersController extends ApiV1Controller
   {
     $data = array();
     $errors = array();
-    if ( Admin::where('id', $id)->exists() ){
+    if ( User::where('id', $id)->exists() ){
       $data["exists"] = 1;
       $success = 1;
       $code = 200;
@@ -49,14 +49,14 @@ class ApiV1UsersController extends ApiV1Controller
     if (  $request->has('hubsynch_id') &&
           is_numeric($request->hubsynch_id) &&
           $request->has('email') &&
-          !Admin::where('email', $request->email)->exists() &&
+          !User::where('email', $request->email)->exists() &&
           $request->has('password')
        ){
 
-      $user = Admin::create([
+      $user = User::create([
           'email' => $request->email,
           'password' => bcrypt($request->password),
-          //'hubsynch_id' => $request->hubsynch_id
+          'hubsynch_id' => $request->hubsynch_id
       ]);
 
       $data["users"] = ["id" => $user->id];
@@ -82,7 +82,7 @@ class ApiV1UsersController extends ApiV1Controller
       if (!$request->has('email')){
         $errors["validation"]['email']['key'] = 'required';
         $errors["validation"]['email']['message'] = 'The email field is required.';
-      }else if( Admin::where('email', $request->email)->exists() ){
+      }else if( User::where('email', $request->email)->exists() ){
         $errors["validation"]['email']['key'] = 'invalid';
         $errors["validation"]['email']['message'] = 'Provided email is already in use.';
       }
@@ -107,9 +107,9 @@ class ApiV1UsersController extends ApiV1Controller
   {
     $data = array();
     $errors = array();
-    if ( Admin::where('id', $id)->exists() ){
+    if ( User::where('id', $id)->exists() ){
 
-      $user =  Admin::find($id);
+      $user =  User::find($id);
       $user->delete();
 
       $data["deleted"] = 1;

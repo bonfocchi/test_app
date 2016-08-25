@@ -30,6 +30,7 @@ class ApiV1PicturesController extends ApiV1Controller
 
     $data = array();
     $errors = array();
+    $base_url = URL::to('/');
 
     $images = Picture::all();
 
@@ -43,17 +44,17 @@ class ApiV1PicturesController extends ApiV1Controller
         $new_element["cached_file_name"] = $image->cached_file_name;
         $new_element["storage_file_name"] = $image->storage_file_name;
         $new_element["created_at"] = $image->created_at->toDateTimeString();
-        if ($image->updated_at != null){
-          $new_element["updated_at"] = $image->updated_at->toDateTimeString();
-        }else{
-          $new_element["updated_at"] = '';
-        }
+        $new_element["updated_at"] = $image->updated_at->toDateTimeString();
         // Where is the user session?!?
         // if(){
         //   $new_element["purchased"] = 0 or 1;
         // }
-        $new_element["download_url"] = "?";
 
+        if ($image->storage_file_name != null){
+          $new_element["download_url"] = $base_url . presigned_url($image->storage_file_name);
+        }else{
+          $new_element["download_url"] = '';
+        }
         array_push ($data, $new_element);
       }
     }
@@ -81,6 +82,7 @@ class ApiV1PicturesController extends ApiV1Controller
 
     $data = array();
     $errors = array();
+    $base_url = URL::to('/');
 
     if ( Picture::where('id', $id)->exists() ){
 
@@ -95,10 +97,15 @@ class ApiV1PicturesController extends ApiV1Controller
       $data["storage_file_name"] = $image->storage_file_name;
       $data["created_at"] = $image->created_at->toDateTimeString();
       $data["updated_at"] = $image->updated_at->toDateTimeString();
-      // Where is the user session?!?
+      // Where is the user session? Currently we only have the admin token.
       // if(){
       //   $new_element["purchased"] = 0 or 1;
       // }
+      if ($image->storage_file_name != null){
+        $data["download_url"] = $base_url . presigned_url($image->storage_file_name);
+      }else{
+        $data["download_url"] = '';
+      }
 
       $success = 1;
       $code = 200;
