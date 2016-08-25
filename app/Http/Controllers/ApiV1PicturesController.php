@@ -193,9 +193,10 @@ class ApiV1PicturesController extends ApiV1Controller
 
 
     if (  Picture::where('id', $id)->exists() &&
-          ( ( $request->has('title') && (strlen($request->title) <= 64) ) ||
-            $request->has('description')
-          )
+          ( ( $request->has('title') && (strlen($request->title) <= 64) )  ||
+            !$request->has('title')
+          ) &&
+          ( $request->has('title') || $request->has('description') )
        ){
 
       $picture = Picture::find($id);
