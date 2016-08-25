@@ -51,7 +51,12 @@ class ApiV1PicturesController extends ApiV1Controller
         // }
 
         if ($image->storage_file_name != null){
-          $new_element["download_url"] = $base_url . presigned_url($image->storage_file_name);
+          $image_link = presigned_url($image->storage_file_name);
+          if (strpos($image_link, "http") === 0){
+            $new_element["download_url"] = $image_link;
+          }else{
+            $new_element["download_url"] = $base_url . $image_link;
+          }
         }else{
           $new_element["download_url"] = '';
         }
@@ -102,7 +107,12 @@ class ApiV1PicturesController extends ApiV1Controller
       //   $new_element["purchased"] = 0 or 1;
       // }
       if ($image->storage_file_name != null){
-        $data["download_url"] = $base_url . presigned_url($image->storage_file_name);
+        $image_link = presigned_url($image->storage_file_name);
+        if (strpos($image_link, "http") === 0){
+          $data["download_url"] = $image_link;
+        }else{
+          $data["download_url"] = $base_url . $image_link;
+        }
       }else{
         $data["download_url"] = '';
       }
