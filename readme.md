@@ -31,12 +31,16 @@ Personally I would use a single table with roles (user groups).
 4 - Models, Relations and CRUD. (STANDBY)
     (Note regarding adding pictures to pages, ideally I would use a drag and drop interface to add pictures to a page, to position and resize them)
 
-5 - Frontend.
-5.1 - Pictures thumbnail creation to be displayed on the frontend. DONE
-5.2 - PDF creation for user download.
-5.3 - Catalog listing and PDF download after login.
+5 - RESTfull API following the specs. DONE
+    ( The API documentation can be found here: http://docs.catalogapp2.apiary.io )
+    (Additionally an 'api_blueprint.md' file was added to the root of this project)
+    NOTE: Catalogs or Catalog pages API calls where not included on this API.
 
-6 - RESTfull API following the specs. (CURRENT)
-    (NOTE: There is no API documentation regarding Catalogs or Catalog pages.)  
+6 - Frontend.
+6.1 - Pictures thumbnail creation to be displayed on the frontend. DONE
+6.2 - PDF creation for user download.
+6.3 - Catalog listing and PDF download after login.
+
+
 
 7 - Tune up.
