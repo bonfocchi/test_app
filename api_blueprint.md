@@ -600,6 +600,26 @@ Retrives a picture that matches the ID as the last segment of the url.
               "duration": 0.236
             }
 
++ Response 404 (application/json)
+
+  When the picture does not exist.
+
+    + Body
+
+            {
+              "success": 0,
+              "code": 404,
+              "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/pictures/113"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:113 was not found."
+              },
+              "duration": 0.574
+            }
+
 ## Creates a picture [/pictures]
 
 Creates a new picture.

@@ -145,7 +145,7 @@ class AdminPagesController extends Controller
    */
   public function manage_images(Catalog $catalog, Page $page)
   {
-    $images = Picture::all();
+    $images = Picture::where('storage_file_name', '!=', '')->get();
     $page_images = $page->pictures()->get();
 
     return view('admin.catalogs.pages.manage_image', ['catalog' => $catalog, 'page' => $page, 'images' => $images, 'page_images' => $page_images]);
@@ -160,7 +160,7 @@ class AdminPagesController extends Controller
   {
      $this->validate($request, [
           'title' => 'required|max:255',
-          'file' => 'required|file|image|mimes:jpeg,bmp,png,gif' 
+          'file' => 'required|file|image|mimes:jpeg,bmp,png,gif'
       ]);
 
 

@@ -166,7 +166,7 @@ class ApiV1UsersController extends ApiV1Controller
 
     }else{
       //$data["deleted"] = 0;
-      $errors["message"] = "The resource that matches ID:".$id." does not found.";
+      $errors["message"] = "The resource that matches ID:".$id." was not found.";
       $errors["code"] = 403001;
       $success = 0;
       $code = 403;
