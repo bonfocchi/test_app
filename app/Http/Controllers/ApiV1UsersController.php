@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
+use App\Subscription;
 
 use App\Http\Requests;
 
@@ -29,7 +30,7 @@ class ApiV1UsersController extends ApiV1Controller
       $code = 200;
 
     }else{
-      //$data["exists"] = 0;
+      $data["exists"] = 0;
       $errors["message"] = "User not found";
       $success = 0;
       $code = 404;
@@ -46,27 +47,66 @@ class ApiV1UsersController extends ApiV1Controller
   {
     $data = array();
     $errors = array();
+    $admin = JWTAuth::parseToken()->authenticate();
+
     if (  $request->has('hubsynch_id') &&
           is_numeric($request->hubsynch_id) &&
           $request->has('email') &&
-          !User::where('email', $request->email)->exists() &&
           $request->has('password')
        ){
+        $new_user = false;
 
-      $user = User::create([
-          'email' => $request->email,
-          'password' => bcrypt($request->password),
-          'hubsynch_id' => $request->hubsynch_id
-      ]);
+        if ( !User::where('hubsynch_id', $request->hubsynch_id)->exists() &&
+             !User::where('email', $request->email)->exists()
+           ){
+          // New user
+          $user = User::create([
+              'email' => $request->email,
+              'password' => bcrypt($request->password),
+              'hubsynch_id' => $request->hubsynch_id
+          ]);
+          $new_user = true;
+        }else if(
+            !User::where('hubsynch_id', $request->hubsynch_id)->exists() &&
+             User::where('email', $request->email)->exists() &&
+            (User::where('email', $request->email)->first()->hubsynch_id == 0)
+        ){
+          // Exists user with email and without hubsynch_id
+          $user = User::where('email', $request->email)->first();
+          $user->hubsynch_id = $request->hubsynch_id;
+          $user->save();
+        }else if(
+            !User::where('hubsynch_id', $request->hubsynch_id)->exists() &&
+             User::where('email', $request->email)->exists() &&
+            (User::where('email', $request->email)->first()->hubsynch_id != 0)
+        ){
+          // Exists user with email and with different hubsynch_id
+          $errors["message"] = "Conflict - User already exists with a different hubsynch_id.";
+          $success = 0;
+          $code = 401;
+          return $this->build_reply($request, $success, $code, $data, $errors );
+        }else{
+          // Exists user provided hubsynch_id
+          $user = User::where('hubsynch_id', $request->hubsynch_id)->first();
+        }
 
-      $data["users"] = ["id" => $user->id];
-      $data["subscriptions"] = ["id" => '?'];
 
-      $success = 1;
-      $code = 200;
+        if ( !$new_user && Subscription::where(['user_id' => $user->id, 'admin_id' => $admin->id])->exists() ){
+          $errors["message"] = "Duplicates - User and Subscription already exist.";
+          $success = 0;
+          $code = 401;
+          return $this->build_reply($request, $success, $code, $data, $errors );
+        }
+
+        $subscription = $user->addSubscription( new Subscription(['admin_id' => $admin->id]) );
+
+        $data["users"] = ["id" => $user->id];
+        $data["subscriptions"] = ["id" => $subscription->id];
+
+        $success = 1;
+        $code = 200;
 
     }else{
-      //$data["exists"] = 0;
       $errors["message"] = "The request parameters are incorrect, please make sure to follow the HiCat document.";
       $errors["code"] = 400002;
       $errors["validation"] = array();
@@ -82,9 +122,6 @@ class ApiV1UsersController extends ApiV1Controller
       if (!$request->has('email')){
         $errors["validation"]['email']['key'] = 'required';
         $errors["validation"]['email']['message'] = 'The email field is required.';
-      }else if( User::where('email', $request->email)->exists() ){
-        $errors["validation"]['email']['key'] = 'invalid';
-        $errors["validation"]['email']['message'] = 'Provided email is already in use.';
       }
 
       if (!$request->has('password')){

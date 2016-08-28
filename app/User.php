@@ -23,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'hubsynch_id'
     ];
 
     /**
@@ -34,4 +34,19 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function subscriptions()
+    {
+      return $this->hasMany(Subscription::class);
+    }
+
+    /**
+     * Adds subscription to user.
+     *
+     * @var subscription
+     */
+    public function addSubscription(Subscription $subscription)
+    {
+      return $this->subscriptions()->save($subscription);
+    }
 }
