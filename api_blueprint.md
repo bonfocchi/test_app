@@ -324,7 +324,18 @@ Checks a user was exist.
 
 ## Creates a user [/users]
 
-Creates a new user.
+Creates a new user, has 5 situation like a following:
+
+1. If there is no user record (with the provided hubsynch ID or email), it creates a user and then creates a relation to a admin as subscription.  
+
+2. When a user (with the provided hubsynch ID or email) already exists and there is no subscription that relates that user and the admin, it creates only a relation to admin as subscription.  
+
+3. When a user (with the provided hubsynch ID or email) and the relation is already existed, it returns a error that notifies about _Duplicates the user_ to a developer.  
+
+4. When a user with the provided hubsynch ID but with a different email already exists, it returns a error that notifies about _Conflict_ to a developer.  
+
+5. When a user with the provided email but with a different hubsynch ID already exists, it returns a error that notifies about _Conflict_ to a developer.
+
 
 ### POST
 
@@ -349,7 +360,7 @@ Creates a new user.
                   "id": 2
                 },
                 "subscriptions": {
-                  "id": 404
+                  "id": 7
                 }
               },
               "errors": [],
