@@ -83,5 +83,20 @@ Route::get('/home', 'HomeController@index');
       Route::post('/pictures/{id}/upload', 'ApiV1PicturesController@upload');
       Route::get('/pictures/{id}/download', 'ApiV1PicturesController@download');
 
+      Route::get('/catalogs', 'ApiV1CatalogsController@retrieve_all');
+      Route::get('/catalogs/{id}', 'ApiV1CatalogsController@retrieve');
+      Route::post('/catalogs', 'ApiV1CatalogsController@create');
+      Route::put('/catalogs/{id}', 'ApiV1CatalogsController@update'); // must use x-www-form-urlencoded to test on Postman
+      Route::delete('/catalogs/{id}', 'ApiV1CatalogsController@delete');
+
+      Route::get('/catalogs/{id}/pages', 'ApiV1PagesController@retrieve_all_in_catalog');
+      Route::get('/pages/{id}', 'ApiV1PagesController@retrieve');
+      Route::post('/catalogs/{id}/pages', 'ApiV1PagesController@create');
+      Route::put('/pages/{id}', 'ApiV1PagesController@update'); // must use x-www-form-urlencoded to test on Postman
+      Route::post('/pages/{id}/reposition', 'ApiV1PagesController@reposition');
+      Route::delete('/pages/{id}', 'ApiV1PagesController@delete');
+
+
+
 
     });

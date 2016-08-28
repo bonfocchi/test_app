@@ -34,7 +34,7 @@ Personally I would use a single table with roles (user groups).
 5 - RESTfull API following the specs. DONE
     ( The API documentation can be found here: http://docs.catalogapp2.apiary.io )
     (Additionally an 'api_blueprint.md' file was added to the root of this project)
-    NOTE: Catalogs or Catalog pages API calls where not included on this API.
+    NOTE: Catalogs or Catalog pages API calls where partially included on this API.
 
 6 - Frontend.
 6.1 - Pictures thumbnail creation to be displayed on the frontend. DONE

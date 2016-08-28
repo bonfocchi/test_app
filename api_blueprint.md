@@ -9,7 +9,7 @@ Users can browse the available catalogs and their pictures, and they can also pu
 But users must have to login into the service for a purchase.
 After a purchase, an user can download a PDF version of the catalog or picture.
 
-__NOTES: The scope is only users, login and pictures resources. Downloading PDF, purchase features, and managing pages and catalogs will not be considered.__
+__NOTES: The scope is only users, login and pictures resources. Downloading PDF, purchase features will not be considered.__
 
 The API is supported some features by REST API as a JSON.
 
@@ -77,7 +77,6 @@ Retrives a logged in data includs a user resource.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -101,7 +100,6 @@ Retrives a logged in data includs a user resource.
    When user did not login.
 
     + Body
-
             {
               "success": 0,
               "code": 401,
@@ -130,7 +128,6 @@ Login a user on the HiCat.
 + Response 201 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 201,
@@ -150,7 +147,6 @@ Login a user on the HiCat.
     A error has occurred while validation.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -185,7 +181,6 @@ Login a user on the HiCat.
     When user that matches the email and password does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -210,7 +205,6 @@ Regenerates a session ID as new.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -230,7 +224,6 @@ Regenerates a session ID as new.
    When user did not login.
 
     + Body
-
             {
               "success": 0,
               "code": 401,
@@ -255,7 +248,6 @@ Logout a user on the HiCat.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -275,7 +267,6 @@ Logout a user on the HiCat.
    When user did not login.
 
     + Body
-
             {
               "success": 0,
               "code": 401,
@@ -307,7 +298,6 @@ Checks a user was exist.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -347,7 +337,6 @@ Creates a new user, has 5 situation like a following:
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -372,7 +361,6 @@ Creates a new user, has 5 situation like a following:
     A error has occurred while validation.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -407,7 +395,6 @@ Creates a new user, has 5 situation like a following:
     The User and Subscription already exist.
 
     + Body
-
             {
               "success": 0,
               "code": 401,
@@ -427,7 +414,6 @@ Creates a new user, has 5 situation like a following:
     Provided email already being used by user with a different hubsynch_id.
 
     + Body
-
           {
             "success": 0,
             "code": 401,
@@ -448,7 +434,6 @@ Creates a new user, has 5 situation like a following:
     Provided hubsynch_id already being used by user with a different email.
 
     + Body
-
             {
               "success": 0,
               "code": 401,
@@ -475,7 +460,6 @@ Deletes a user that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -490,12 +474,11 @@ Deletes a user that matches the ID as the last segment of the url.
               "duration": 0.263
             }
 
-+ Response 403
++ Response 403 (application/json)
 
     When the user does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 403,
@@ -576,7 +559,6 @@ Retrives a picture that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -605,7 +587,6 @@ Retrives a picture that matches the ID as the last segment of the url.
   When the picture does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 404,
@@ -633,7 +614,6 @@ Creates a new picture.
 + Response 201 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 201,
@@ -653,7 +633,6 @@ Creates a new picture.
     A error has occurred while validation.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -695,7 +674,6 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 201,
@@ -715,7 +693,6 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     A error has occurred while validation.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -737,12 +714,11 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
               "duration": 0.249
             }
 
-+ Response 403
++ Response 403 (application/json)
 
     When the picture does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 403,
@@ -770,7 +746,6 @@ Deletes a picture that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 200,
@@ -785,12 +760,11 @@ Deletes a picture that matches the ID as the last segment of the url.
               "duration": 0.365
             }
 
-+ Response 403
++ Response 403 (application/json)
 
     When the picture does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 403,
@@ -819,7 +793,6 @@ Uploads a image file and associates it to the picture resource that matches the 
 + Response 201 (application/json)
 
     + Body
-
             {
               "success": 1,
               "code": 201,
@@ -840,7 +813,6 @@ Uploads a image file and associates it to the picture resource that matches the 
     A error has occurred while validation.
 
     + Body
-
             {
               "success": 0,
               "code": 400,
@@ -868,12 +840,11 @@ Uploads a image file and associates it to the picture resource that matches the 
               "duration": 0.245
             }
 
-+ Response 403
++ Response 403 (application/json)
 
     When the picture does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 403,
@@ -889,12 +860,11 @@ Uploads a image file and associates it to the picture resource that matches the 
               "duration": 0.257
             }
 
-+ Response 500
++ Response 500 (application/json)
 
     A error has occurred while uploading a file.
 
     + Body
-
             {
                 "success": 0,
                 "code": 500,
@@ -931,7 +901,6 @@ __NOTE: I left the `application/image` on the `200` response, but to test I had 
     When the picture does not exist.
 
     + Body
-
             {
               "success": 0,
               "code": 403,
@@ -945,4 +914,698 @@ __NOTE: I left the `application/image` on the `200` response, but to test I had 
                 "code": 403001
               },
               "duration": 0.164
+            }
+
+
+# Group Catalogs
+
+This endpoint controls the catalogs resource.
+
+## Retrives a list of catalogs [/catalogs]
+
+Retrives a list of the catalogs that are related to the admin.
+
+### GET
+
++ Response 200 (application/json)
+
+    + Body
+    {
+      "success": 1,
+      "code": 200,
+      "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/catalogs",
+                "limit": 30,
+                "offset": 0,
+                "total": 2
+              },
+      "data": [
+                {
+                  "id": 1,
+                  "admin_id": 1,
+                  "name": "Sample",
+                  "created_at": "2016-08-12 22:57:44",
+                  "updated_at": "2016-08-12 22:57:44"
+                },
+                {
+                  "id": 2,
+                  "admin_id": 1,
+                  "name": "Second Catalog",
+                  "created_at": "2016-08-28 20:33:45",
+                  "updated_at": "2016-08-28 20:33:45"
+                }
+              ],
+      "errors": [],
+      "duration": 0.516
+    }
+
+## Retrives a catalogs [/catalogs/{id}]
+
+Retrives a catalog that matches the ID as the last segment of the url.
+
+### GET
+
++ Parameters
+    + id: `2` (required, int) - The catalog primary ID.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/catalogs/2"
+              },
+              "data": {
+                "id": 2,
+                "admin_id": 1,
+                "name": "Second Catalog",
+                "created_at": "2016-08-28 20:33:45",
+                "updated_at": "2016-08-28 20:33:45"
+              },
+              "errors": [],
+              "duration": 0.51
+            }
+
++ Response 404 (application/json)
+
+  When the catalog does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 404,
+              "meta": {
+              "method": "GET",
+              "endpoint": "api/v1/catalogs/20"
+              },
+              "data": [],
+              "errors": {
+              "message": "The resource that matches ID:20 was not found."
+              },
+              "duration": 0.509
+            }
+
+## Creates a catalog [/catalogs]
+
+Creates a new catalog.
+
+### POST
+
++ Parameters
+    + name: `Sample catalog` (required, string) - The catalog's name.
+
++ Response 201 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 201,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/catalogs"
+              },
+              "data": {
+                "id": 3
+              },
+              "errors": [],
+              "duration": 0.516
+            }
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+            {
+              "success": 0,
+              "code": 400,
+              "meta": {
+                        "method": "POST",
+                        "endpoint": "api/v1/catalogs"
+                      },
+              "data": [],
+              "errors": {
+                          "message": "The request parameters are incorrect, please make sure to follow the HiCat document.",
+                          "code": 400002,
+                          "validation": {
+                                          "name": {
+                                                    "key": "required",
+                                                    "message": "The name field is required."
+                                                  }
+                                        }
+                        },
+              "duration": 0.548
+            }
+
+
+## Updates a catalog [/catalogs/{id}]
+
+Updates a catalog that macthes the ID as the last segment of the url.
+
+__NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should be used. Alternatively a additional parameter `_method` with the value `PUT` can be used.__
+
+### PUT
+
++ Parameters
+    + id: `2` (required, int) - The catalog's primary ID.
+    + name: `New Catalog Name` (optional, string) - A modifies catalog name.
+
++ Response 200 (application/json)
+
+    + Body
+          {
+            "success": 1,
+            "code": 201,
+            "meta": {
+              "method": "PUT",
+              "endpoint": "api/v1/catalogs/2"
+            },
+            "data": {
+              "id": 2
+            },
+            "errors": [],
+            "duration": 0.543
+          }
+
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+            {
+              "success": 0,
+              "code": 400,
+              "meta": {
+                "method": "PUT",
+                "endpoint": "api/v1/catalogs/2"
+              },
+              "data": [],
+              "errors": {
+                "message": "The request parameters are incorrect, please make sure to follow the HiCat document.",
+                "code": 400002,
+                "validation": [
+                    "name": {
+                      "key": "required",
+                      "message": "The name field is required."
+                    },
+                    "name": {
+                      "key": "max:64",
+                      "message": "The name may not be greater than 64 characters."
+                  ]
+                }
+              },
+              "duration": 0.507
+            }
+
++ Response 403 (application/json)
+
+    When the catalog does not exist.
+
+    + Body            
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "PUT",
+                "endpoint": "api/v1/catalogs/22"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:22 does not found.",
+                "code": 403001
+              },
+              "duration": 0.565
+            }
+
+## Deletes a catalog [/catalogs/{id}]
+
+Deletes a catalog that matches the ID as the last segment of the url.
+
+### DELETE
+
++ Parameters
+    + id: `2` (required, int) - The catalogs's primary ID.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "DELETE",
+                "endpoint": "api/v1/catalogs/2"
+              },
+              "data": {
+                "deleted": 1
+              },
+              "errors": [],
+              "duration": 0.659
+            }
+
++ Response 403 (application/json)
+
+    When the catalog does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "DELETE",
+                "endpoint": "api/v1/catalogs/2"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:2 does not found.",
+                "code": 403001
+              },
+              "duration": 0.458
+            }
+
+
+# Group Pages
+
+This endpoint controls the pages resource.
+
+## Retrives a list of pages [/catalogs/{id}/pages]
+
+Retrives a list of the pages that is related to the catalog that matches the ID as the second segment of the url path.
+
+### GET
+
++ Parameters
+    + id: `1` (required, int) - The catalog's primary ID.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/catalogs/1/pages",
+                "limit": 30,
+                "offset": 0,
+                "total": 3
+              },
+              "data": [
+                {
+                  "id": 1,
+                  "title": "Cover",
+                  "description": "",
+                  "created_at": "2016-08-12 22:57:52",
+                  "updated_at": "2016-08-12 22:57:52"
+                },
+                {
+                  "id": 2,
+                  "title": "index",
+                  "description": "",
+                  "created_at": "2016-08-12 22:57:58",
+                  "updated_at": "2016-08-12 22:57:58"
+                },
+                {
+                  "id": 3,
+                  "title": "Last Page",
+                  "description": "",
+                  "created_at": "2016-08-12 22:58:10",
+                  "updated_at": "2016-08-12 22:58:10"
+                }
+              ],
+              "errors": [],
+              "duration": 0.518
+            }
+
+
+## Retrives a page [/pages/{id}]
+
+Retrives a page that matches the ID as the last segment of the url.
+
+### GET
+
++ Parameters
+    + id: `3` (required, int) - The page's primary ID.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/pages/3"
+              },
+              "data": {
+                "id": 3,
+                "title": "Last Page",
+                "description": "",
+                "created_at": "2016-08-12 22:58:10",
+                "updated_at": "2016-08-12 22:58:10"
+              },
+              "errors": [],
+              "duration": 0.509
+            }
+
++ Response 404 (application/json)
+
+  When the page does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 404,
+              "meta": {
+                "method": "GET",
+                "endpoint": "api/v1/pages/31"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:31 was not found."
+              },
+              "duration": 0.557
+            }
+
+## Creates a page [catalogs/{id}/pages]
+
+Creates a new page.
+
+### POST
+
++ Parameters
+    + id: `1` (required, int) - The catalog's primary ID.
+    + title: `Sample page` (required, string) - The page's name.
+    + description: `This is description of Sample page` (optinal, string) - The page's description.
+
++ Response 201 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 201,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/catalogs/1/pages"
+              },
+              "data": {
+                "id": 7
+              },
+              "errors": [],
+              "duration": 0.693
+            }
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+            {
+              "success": 0,
+              "code": 400,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/catalogs/1/pages"
+              },
+              "data": [],
+              "errors": {
+                "message": "The request parameters are incorrect, please make sure to follow the HiCat document.",
+                "code": 400002,
+                "validation": [
+                      "title": {
+                        "key": "required",
+                        "message": "The title field is required."
+                      },
+                      "title": {
+                        "key": "max:64",
+                        "message": "The title may not be greater than 64 characters."
+                    ]
+              },
+              "duration": 0.573
+            }
+
+
++ Response 404 (application/json)
+
+  When the catalog does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/catalogs/110/pages"
+              },
+              "data": [],
+              "errors": {
+                "message": "The catalog resource that matches ID:110 was not found.",
+                "code": 403001
+              },
+              "duration": 0.587
+            }
+
+## Updates a page [/pages/{id}]
+
+Updates a page that macthes the ID as the last segment of the url.
+
+__NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should be used. Alternatively a additional parameter `_method` with the value `PUT` can be used.__
+
+### PUT
+
++ Parameters
+    + id: `7` (required, int) - The page's primary ID.
+    + title: `Sample page change` (optional, string) - A modifies page title.
+    + description: `This is description of Sample page with a change` (optional, string) - A modifies page description.
+
++ Response 200 (application/json)
+
+    + Body
+            {
+              "success": 1,
+              "code": 201,
+              "meta": {
+                "method": "PUT",
+                "endpoint": "api/v1/pages/7"
+              },
+              "data": {
+                "id": 7
+              },
+              "errors": [],
+              "duration": 0.589
+            }
+
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+            {
+              "success": 0,
+              "code": 400,
+              "meta": {
+                "method": "PUT",
+                "endpoint": "api/v1/pages/7"
+              },
+              "data": [],
+              "errors": {
+                "message": "The request parameters are incorrect, please make sure to follow the HiCat document.",
+                "code": 400002,
+                "validation": {
+                  "title": {
+                    "key": "max:64",
+                    "message": "The name may not be greater than 64 characters."
+                  }
+                }
+              },
+              "duration": 0.58
+            }
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+          {
+            "success": 0,
+            "code": 400,
+            "meta": {
+              "method": "PUT",
+              "endpoint": "api/v1/pages/7"
+            },
+            "data": [],
+            "errors": {
+              "message": "The title or the description need to be provided to update successfully."
+            },
+            "duration": 0.485
+          }
+
++ Response 403 (application/json)
+
+    When the page does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "PUT",
+                "endpoint": "api/v1/pages/71"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:71 does not found.",
+                "code": 403001
+              },
+              "duration": 0.64
+            }
+
+## Deletes a page [/pages/{id}/reposition]
+
+Reposition a page that matches the ID as the second segment of the url path.
+
+### DELETE
+
++ Parameters
+    + id: `7` (required, int) - The page's primary ID.
+    + position: `1` (required, int) - The new position of the page.
+
++ Response 200 (application/json)
+
+    + Body  
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/pages/7/reposition"
+              },
+              "data": {
+                "repositioned": 1
+              },
+              "errors": [],
+              "duration": 0.574
+            }
+
+
++ Response 400 (application/json)
+
+    A error has occurred while validation.
+
+    + Body
+            {
+              "success": 0,
+              "code": 400,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/pages/7/reposition"
+              },
+              "data": [],
+              "errors": {
+                "message": "The request parameters are incorrect.",
+                "validation": {
+                  "position": {
+                    "key": "required",
+                    "message": "The position field is required."
+                  }
+                }
+              },
+              "duration": 0.544
+            }
+
+
++ Response 403 (application/json)
+
+    When the position is not valid.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/pages/7/reposition"
+              },
+              "data": [],
+              "errors": {
+                "message": "The position must be between 0 and 4(the number of pages on the catalog)",
+                "code": 403001
+              },
+              "duration": 0.692
+            }
+
+
++ Response 403 (application/json)
+
+    When the page does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/pages/71/reposition"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:71 does not found.",
+                "code": 403001
+              },
+              "duration": 0.586
+            }
+
+
+
+## Deletes a page [/pages/{id}]
+
+Deletes a page that matches the ID as the last segment of the url.
+
+
+### DELETE
+
++ Parameters
+    + id: `7` (required, int) - The page's primary ID.
+
++ Response 200 (application/json)
+
+    + Body        
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                "method": "DELETE",
+                "endpoint": "api/v1/pages/7"
+              },
+              "data": {
+                "deleted": 1
+              },
+              "errors": [],
+              "duration": 0.631
+            }    
+
++ Response 403 (application/json)
+
+    When the page does not exist.
+
+    + Body
+            {
+              "success": 0,
+              "code": 403,
+              "meta": {
+                "method": "DELETE",
+                "endpoint": "api/v1/pages/7"
+              },
+              "data": [],
+              "errors": {
+                "message": "The resource that matches ID:7 does not found.",
+                "code": 403001
+              },
+              "duration": 0.601
             }

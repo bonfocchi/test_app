@@ -230,7 +230,7 @@ class ApiV1PicturesController extends ApiV1Controller
         $errors["validation"] = array();
 
         $errors["validation"]['title']['key'] = 'max:64';
-        $errors["validation"]['title']['message'] = 'The name may not be greater than 64 characters.';
+        $errors["validation"]['title']['message'] = 'The title may not be greater than 64 characters.';
         $code = 400;
       }else if( !$request->has('title') && !$request->has('description') ){
         //$errors["message"] = "The request parameters are incorrect, please make sure to follow the HiCat document.";
@@ -255,8 +255,8 @@ class ApiV1PicturesController extends ApiV1Controller
     $errors = array();
     if ( Picture::where('id', $id)->exists() ){
 
-      $user =  Picture::find($id);
-      $user->delete();
+      $picture =  Picture::find($id);
+      $picture->delete();
 
       $data["deleted"] = 1;
       $success = 1;
