@@ -391,6 +391,67 @@ Creates a new user.
               "duration": 0.205
             }
 
++ Response 401 (application/json)
+
+    The User and Subscription already exist.
+
+    + Body
+
+            {
+              "success": 0,
+              "code": 401,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/users"
+              },
+              "data": [],
+              "errors": {
+                "message": "Duplicates - User and Subscription already exist."
+              },
+              "duration": 0.5
+            }
+
++ Response 401 (application/json)
+
+    Provided email already being used by user with a different hubsynch_id.
+
+    + Body
+
+          {
+            "success": 0,
+            "code": 401,
+            "meta": {
+              "method": "POST",
+              "endpoint": "api/v1/users"
+            },
+            "data": [],
+            "errors": {
+              "message": "Conflict - Email already being used by user with a different hubsynch_id."
+            },
+            "duration": 0.437
+          }
+
+
++ Response 401 (application/json)
+
+    Provided hubsynch_id already being used by user with a different email.
+
+    + Body
+
+            {
+              "success": 0,
+              "code": 401,
+              "meta": {
+                "method": "POST",
+                "endpoint": "api/v1/users"
+              },
+              "data": [],
+              "errors": {
+                "message": "Conflict - hubsynch_id already being used by user with a different email."
+              },
+              "duration": 0.528
+            }
+
 ## Deletes a user [/users/{id}]
 
 Deletes a user that matches the ID as the last segment of the url.
