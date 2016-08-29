@@ -37,7 +37,7 @@ You need to consider about the versioning of API, please include the version num
 
 ### User authorization
 
-This authorization is made by providing the Admin token as a header key `Authorization` and the value for that key should start with `Bearer `.  
+This authorization is made by providing the Admin token as a header key `Authorization` and the value for that key should start with `Bearer `.
 This is required by controlling all resources.
 
 ```
@@ -46,7 +46,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImlzcyI6I
 
 #### How to acquire a session ID
 
-The user's session ID is acquired by making a POST request to `/login` and providing the user's email and password.  
+The user's session ID is acquired by making a POST request to `/login` and providing the user's email and password.
 If the login is successful, it returns the sessionID in the `data` container, see the [/login]() endpoint.
 
 ### Example
@@ -77,6 +77,7 @@ Retrives a logged in data includs a user resource.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -100,6 +101,7 @@ Retrives a logged in data includs a user resource.
    When user did not login.
 
     + Body
+
             {
               "success": 0,
               "code": 401,
@@ -128,6 +130,7 @@ Login a user on the HiCat.
 + Response 201 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -147,6 +150,7 @@ Login a user on the HiCat.
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -181,6 +185,7 @@ Login a user on the HiCat.
     When user that matches the email and password does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -205,6 +210,7 @@ Regenerates a session ID as new.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -224,6 +230,7 @@ Regenerates a session ID as new.
    When user did not login.
 
     + Body
+
             {
               "success": 0,
               "code": 401,
@@ -248,6 +255,7 @@ Logout a user on the HiCat.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -267,6 +275,7 @@ Logout a user on the HiCat.
    When user did not login.
 
     + Body
+
             {
               "success": 0,
               "code": 401,
@@ -298,6 +307,7 @@ Checks a user was exist.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -316,13 +326,13 @@ Checks a user was exist.
 
 Creates a new user, has 5 situation like a following:
 
-1. If there is no user record (with the provided hubsynch ID or email), it creates a user and then creates a relation to a admin as subscription.  
+1. If there is no user record (with the provided hubsynch ID or email), it creates a user and then creates a relation to a admin as subscription.
 
-2. When a user (with the provided hubsynch ID or email) already exists and there is no subscription that relates that user and the admin, it creates only a relation to admin as subscription.  
+2. When a user (with the provided hubsynch ID or email) already exists and there is no subscription that relates that user and the admin, it creates only a relation to admin as subscription.
 
-3. When a user (with the provided hubsynch ID or email) and the relation is already existed, it returns a error that notifies about _Duplicates the user_ to a developer.  
+3. When a user (with the provided hubsynch ID or email) and the relation is already existed, it returns a error that notifies about _Duplicates the user_ to a developer.
 
-4. When a user with the provided hubsynch ID but with a different email already exists, it returns a error that notifies about _Conflict_ to a developer.  
+4. When a user with the provided hubsynch ID but with a different email already exists, it returns a error that notifies about _Conflict_ to a developer.
 
 5. When a user with the provided email but with a different hubsynch ID already exists, it returns a error that notifies about _Conflict_ to a developer.
 
@@ -337,6 +347,7 @@ Creates a new user, has 5 situation like a following:
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -361,6 +372,7 @@ Creates a new user, has 5 situation like a following:
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -395,6 +407,7 @@ Creates a new user, has 5 situation like a following:
     The User and Subscription already exist.
 
     + Body
+
             {
               "success": 0,
               "code": 401,
@@ -414,19 +427,20 @@ Creates a new user, has 5 situation like a following:
     Provided email already being used by user with a different hubsynch_id.
 
     + Body
-          {
-            "success": 0,
-            "code": 401,
-            "meta": {
-              "method": "POST",
-              "endpoint": "api/v1/users"
-            },
-            "data": [],
-            "errors": {
-              "message": "Conflict - Email already being used by user with a different hubsynch_id."
-            },
-            "duration": 0.437
-          }
+
+            {
+                "success": 0,
+                "code": 401,
+                "meta": {
+                  "method": "POST",
+                  "endpoint": "api/v1/users"
+                },
+                "data": [],
+                "errors": {
+                    "message": "Conflict - Email already being used by user with a different hubsynch_id."
+                },
+                "duration": 0.437
+            }
 
 
 + Response 401 (application/json)
@@ -434,6 +448,7 @@ Creates a new user, has 5 situation like a following:
     Provided hubsynch_id already being used by user with a different email.
 
     + Body
+
             {
               "success": 0,
               "code": 401,
@@ -460,6 +475,7 @@ Deletes a user that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -479,6 +495,7 @@ Deletes a user that matches the ID as the last segment of the url.
     When the user does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -507,6 +524,7 @@ Retrives a list of the pictures that is related to the admin.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -559,6 +577,7 @@ Retrives a picture that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -587,6 +606,7 @@ Retrives a picture that matches the ID as the last segment of the url.
   When the picture does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 404,
@@ -614,6 +634,7 @@ Creates a new picture.
 + Response 201 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -633,6 +654,7 @@ Creates a new picture.
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -674,6 +696,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -693,6 +716,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -719,6 +743,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     When the picture does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -746,6 +771,7 @@ Deletes a picture that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -765,6 +791,7 @@ Deletes a picture that matches the ID as the last segment of the url.
     When the picture does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -782,7 +809,7 @@ Deletes a picture that matches the ID as the last segment of the url.
 
 ## Uploads a picture image [/pictures/{id}/upload]
 
-Uploads a image file and associates it to the picture resource that matches the ID, and then returns the associated picture resource's ID.    
+Uploads a image file and associates it to the picture resource that matches the ID, and then returns the associated picture resource's ID.
 
 ### POST
 
@@ -793,6 +820,7 @@ Uploads a image file and associates it to the picture resource that matches the 
 + Response 201 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -813,6 +841,7 @@ Uploads a image file and associates it to the picture resource that matches the 
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -845,6 +874,7 @@ Uploads a image file and associates it to the picture resource that matches the 
     When the picture does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -865,6 +895,7 @@ Uploads a image file and associates it to the picture resource that matches the 
     A error has occurred while uploading a file.
 
     + Body
+
             {
                 "success": 0,
                 "code": 500,
@@ -901,6 +932,7 @@ __NOTE: I left the `application/image` on the `200` response, but to test I had 
     When the picture does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -930,35 +962,36 @@ Retrives a list of the catalogs that are related to the admin.
 + Response 200 (application/json)
 
     + Body
-    {
-      "success": 1,
-      "code": 200,
-      "meta": {
-                "method": "GET",
-                "endpoint": "api/v1/catalogs",
-                "limit": 30,
-                "offset": 0,
-                "total": 2
-              },
-      "data": [
-                {
-                  "id": 1,
-                  "admin_id": 1,
-                  "name": "Sample",
-                  "created_at": "2016-08-12 22:57:44",
-                  "updated_at": "2016-08-12 22:57:44"
-                },
-                {
-                  "id": 2,
-                  "admin_id": 1,
-                  "name": "Second Catalog",
-                  "created_at": "2016-08-28 20:33:45",
-                  "updated_at": "2016-08-28 20:33:45"
-                }
-              ],
-      "errors": [],
-      "duration": 0.516
-    }
+
+            {
+              "success": 1,
+              "code": 200,
+              "meta": {
+                        "method": "GET",
+                        "endpoint": "api/v1/catalogs",
+                        "limit": 30,
+                        "offset": 0,
+                        "total": 2
+                      },
+              "data": [
+                        {
+                          "id": 1,
+                          "admin_id": 1,
+                          "name": "Sample",
+                          "created_at": "2016-08-12 22:57:44",
+                          "updated_at": "2016-08-12 22:57:44"
+                        },
+                        {
+                          "id": 2,
+                          "admin_id": 1,
+                          "name": "Second Catalog",
+                          "created_at": "2016-08-28 20:33:45",
+                          "updated_at": "2016-08-28 20:33:45"
+                        }
+                      ],
+              "errors": [],
+              "duration": 0.516
+            }
 
 ## Retrives a catalogs [/catalogs/{id}]
 
@@ -972,6 +1005,7 @@ Retrives a catalog that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -995,6 +1029,7 @@ Retrives a catalog that matches the ID as the last segment of the url.
   When the catalog does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 404,
@@ -1021,6 +1056,7 @@ Creates a new catalog.
 + Response 201 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -1040,6 +1076,7 @@ Creates a new catalog.
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -1077,19 +1114,20 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
 + Response 200 (application/json)
 
     + Body
-          {
-            "success": 1,
-            "code": 201,
-            "meta": {
-              "method": "PUT",
-              "endpoint": "api/v1/catalogs/2"
-            },
-            "data": {
-              "id": 2
-            },
-            "errors": [],
-            "duration": 0.543
-          }
+
+            {
+                "success": 1,
+                "code": 201,
+                "meta": {
+                  "method": "PUT",
+                  "endpoint": "api/v1/catalogs/2"
+                },
+                "data": {
+                  "id": 2
+                },
+                "errors": [],
+                "duration": 0.543
+            }
 
 
 + Response 400 (application/json)
@@ -1097,6 +1135,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -1126,7 +1165,8 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
 
     When the catalog does not exist.
 
-    + Body            
+    + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1154,6 +1194,7 @@ Deletes a catalog that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -1173,6 +1214,7 @@ Deletes a catalog that matches the ID as the last segment of the url.
     When the catalog does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1205,6 +1247,7 @@ Retrives a list of the pages that is related to the catalog that matches the ID 
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -1255,6 +1298,7 @@ Retrives a page that matches the ID as the last segment of the url.
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 200,
@@ -1278,6 +1322,7 @@ Retrives a page that matches the ID as the last segment of the url.
   When the page does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 404,
@@ -1294,18 +1339,19 @@ Retrives a page that matches the ID as the last segment of the url.
 
 ## Creates a page [catalogs/{id}/pages]
 
-Creates a new page.
+        Creates a new page.
 
 ### POST
 
 + Parameters
     + id: `1` (required, int) - The catalog's primary ID.
-    + title: `Sample page` (required, string) - The page's name.
-    + description: `This is description of Sample page` (optinal, string) - The page's description.
+    + title: `Sample_page` (required, string) - The page's name.
+    + description: `This_is_description_of_Sample_page` (optinal, string) - The page's description.
 
 + Response 201 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -1325,6 +1371,7 @@ Creates a new page.
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -1355,6 +1402,7 @@ Creates a new page.
   When the catalog does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1386,6 +1434,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
 + Response 200 (application/json)
 
     + Body
+
             {
               "success": 1,
               "code": 201,
@@ -1406,6 +1455,7 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -1432,25 +1482,27 @@ __NOTE: When making a PUT request with parameters `x-www-form-urlencoded` should
     A error has occurred while validation.
 
     + Body
-          {
-            "success": 0,
-            "code": 400,
-            "meta": {
-              "method": "PUT",
-              "endpoint": "api/v1/pages/7"
-            },
-            "data": [],
-            "errors": {
-              "message": "The title or the description need to be provided to update successfully."
-            },
-            "duration": 0.485
-          }
+
+            {
+                "success": 0,
+                "code": 400,
+                "meta": {
+                  "method": "PUT",
+                  "endpoint": "api/v1/pages/7"
+                },
+                "data": [],
+                "errors": {
+                  "message": "The title or the description need to be provided to update successfully."
+                },
+                "duration": 0.485
+            }
 
 + Response 403 (application/json)
 
     When the page does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1478,7 +1530,8 @@ Reposition a page that matches the ID as the second segment of the url path.
 
 + Response 200 (application/json)
 
-    + Body  
+    + Body
+
             {
               "success": 1,
               "code": 200,
@@ -1499,6 +1552,7 @@ Reposition a page that matches the ID as the second segment of the url path.
     A error has occurred while validation.
 
     + Body
+
             {
               "success": 0,
               "code": 400,
@@ -1525,6 +1579,7 @@ Reposition a page that matches the ID as the second segment of the url path.
     When the position is not valid.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1546,6 +1601,7 @@ Reposition a page that matches the ID as the second segment of the url path.
     When the page does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
@@ -1575,7 +1631,8 @@ Deletes a page that matches the ID as the last segment of the url.
 
 + Response 200 (application/json)
 
-    + Body        
+    + Body
+
             {
               "success": 1,
               "code": 200,
@@ -1588,13 +1645,14 @@ Deletes a page that matches the ID as the last segment of the url.
               },
               "errors": [],
               "duration": 0.631
-            }    
+            }
 
 + Response 403 (application/json)
 
     When the page does not exist.
 
     + Body
+
             {
               "success": 0,
               "code": 403,
